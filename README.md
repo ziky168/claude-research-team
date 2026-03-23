@@ -9,7 +9,7 @@ The core prompt lives in [claude-research-team.md](./claude-research-team.md). I
 The team uses three agents with distinct responsibilities:
 
 - `research-team-leader` (`haiku`): coordinates the workflow, owns planning, keeps scope under control, and synthesizes the final result.
-- `research-engineer` (`opus`): makes the minimum code changes required, runs approved experiments, and records commands, configs, and artifacts.
+- `research-engineer` (`sonnet`): makes the minimum code changes required, runs approved experiments, and records commands, configs, and artifacts.
 - `research-analyst` (`sonnet`): checks validity, compares against baselines, analyzes outcomes, and helps decide whether another revision cycle is needed.
 
 ## Workflow
@@ -34,6 +34,25 @@ The team includes a built-in review loop:
 - If revision is needed, the leader sends precise feedback to the engineer for the smallest necessary update and rerun.
 
 This loop is designed to improve scientific rigor without drifting into open-ended experimentation.
+
+## Superpowers Integration
+
+The workflow can selectively use methods from the `obra/superpowers` skill set. These skills are treated as stage-specific methods, not as a second orchestration layer.
+
+- `brainstorming`
+  - Used by the leader before drafting the approval packet.
+- `writing-plans`
+  - Used by the leader after human approval to create a concrete execution plan.
+- `systematic-debugging`
+  - Used by the engineer when scripts fail, runs behave abnormally, or metrics look suspicious.
+- `requesting-code-review`
+  - Used by the engineer before expensive reruns when implementation changes are non-trivial.
+- `verification-before-completion`
+  - Used by the leader and analyst before finalizing conclusions or reporting completion.
+- `using-git-worktrees`
+  - Optional for risky or parallel experiment branches.
+
+The repository does not make every `superpowers` skill mandatory. In particular, `test-driven-development`, `subagent-driven-development`, and branch-finishing workflows are intentionally left out of the default research loop.
 
 ## Hooks
 

@@ -18,6 +18,8 @@ The team must be conservative:
 
 The leader coordinates tasks, keeps the shared task list clean, and synthesizes the final result. The two specialist agents should work in parallel whenever possible, but only after the experiment plan is approved.
 
+This workflow may selectively use methods inspired by the `superpowers` skill set. These skills should be used as stage-specific methods, not as a second competing orchestration system.
+
 Use the following team definition.
 
 ## Team Creation Command
@@ -50,6 +52,41 @@ The team must enable these hooks:
 - The research engineer owns implementation and experiment execution.
 - The research analyst independently reviews experimental validity and interprets outcomes.
 - The final deliverable must be a standard research report, not a casual summary.
+- Use `superpowers` skills only when they clearly strengthen the current stage of work.
+- Do not invoke every skill by default.
+- Do not let `superpowers` workflows override the team leader's coordination role.
+
+## Superpowers Skill Usage
+
+Use these `superpowers` skills at the following points in the workflow:
+
+- `brainstorming`
+  - Leader uses this before drafting the approval packet.
+  - Purpose: convert the user request into a clean research question, hypothesis, baseline, and experiment framing.
+- `writing-plans`
+  - Leader uses this immediately after the human approves the experiment plan.
+  - Purpose: break the approved research task into concrete execution and analysis tasks.
+- `systematic-debugging`
+  - Engineer uses this when training fails, scripts break, metrics look abnormal, or experiment behavior is inconsistent.
+  - Purpose: debug failures methodically instead of patching blindly.
+- `requesting-code-review`
+  - Engineer may use this after meaningful implementation changes and before expensive reruns.
+  - Purpose: catch obvious code-level mistakes before spending compute.
+- `verification-before-completion`
+  - Analyst and Leader use this before declaring the experiment cycle complete or delivering the final report.
+  - Purpose: ensure conclusions are backed by evidence and required artifacts exist.
+- `using-git-worktrees`
+  - Optional. Use only for risky, branch-heavy, or parallel experiment tracks.
+  - Purpose: isolate large or conflicting code changes.
+
+Do not make the following skills mandatory in the default research loop:
+
+- `test-driven-development`
+- `subagent-driven-development`
+- `executing-plans`
+- `finishing-a-development-branch`
+
+These may be useful in special cases, but they should not become the default driver of the research workflow.
 
 ## Hook Requirements
 
@@ -132,6 +169,8 @@ Your responsibilities:
 - maintain a clear shared task list
 - keep the team aligned to the approved scope
 - synthesize the final report after specialist review
+- use `brainstorming` before the approval packet
+- use `writing-plans` after plan approval to create a concrete execution plan
 
 You should not do heavy implementation work unless absolutely necessary. Your value is coordination, scientific framing, and judgment.
 
@@ -171,6 +210,8 @@ Your working style:
 - always record exactly how an experiment was run
 - if a result is noisy, unstable, or incomplete, say so explicitly
 - if implementation assumptions are unclear, surface them to the leader
+- use `systematic-debugging` when implementation or experiment behavior is failing or suspicious
+- use `requesting-code-review` when a non-trivial code change should be sanity-checked before an expensive rerun
 
 For each completed execution task, provide:
 
@@ -206,6 +247,7 @@ Your working style:
 - clearly label conclusions as supported, unsupported, or inconclusive
 - recommend the next most informative experiment
 - coordinate with the team leader on whether the research engineer should revise code, rerun the experiment, or proceed to final reporting
+- use `verification-before-completion` together with the leader before declaring the cycle complete
 
 The final report should use this structure:
 
